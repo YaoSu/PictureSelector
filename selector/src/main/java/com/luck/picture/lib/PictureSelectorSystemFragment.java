@@ -68,27 +68,28 @@ public class PictureSelectorSystemFragment extends PictureCommonFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         createSystemContracts();
-        if (PermissionChecker.isCheckReadStorage(selectorConfig.chooseMode,getContext())) {
-            openSystemAlbum();
-        } else {
-            String[] readPermissionArray = PermissionConfig.getReadPermissionArray(getAppContext(), selectorConfig.chooseMode);
-            onPermissionExplainEvent(true, readPermissionArray);
-            if (selectorConfig.onPermissionsEventListener != null) {
-                onApplyPermissionsEvent(PermissionEvent.EVENT_SYSTEM_SOURCE_DATA, readPermissionArray);
-            } else {
-                PermissionChecker.getInstance().requestPermissions(this, readPermissionArray, new PermissionResultCallback() {
-                    @Override
-                    public void onGranted() {
-                        openSystemAlbum();
-                    }
+        openSystemAlbum();
+        // if (PermissionChecker.isCheckReadStorage(selectorConfig.chooseMode,getContext())) {
+        //     openSystemAlbum();
+        // } else {
+        //     String[] readPermissionArray = PermissionConfig.getReadPermissionArray(getAppContext(), selectorConfig.chooseMode);
+        //     onPermissionExplainEvent(true, readPermissionArray);
+        //     if (selectorConfig.onPermissionsEventListener != null) {
+        //         onApplyPermissionsEvent(PermissionEvent.EVENT_SYSTEM_SOURCE_DATA, readPermissionArray);
+        //     } else {
+        //         PermissionChecker.getInstance().requestPermissions(this, readPermissionArray, new PermissionResultCallback() {
+        //             @Override
+        //             public void onGranted() {
+        //                 openSystemAlbum();
+        //             }
 
-                    @Override
-                    public void onDenied() {
-                        handlePermissionDenied(readPermissionArray);
-                    }
-                });
-            }
-        }
+        //             @Override
+        //             public void onDenied() {
+        //                 handlePermissionDenied(readPermissionArray);
+        //             }
+        //         });
+        //     }
+        // }
     }
 
     @Override
